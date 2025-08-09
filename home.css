@@ -1,6 +1,6 @@
 /* Base Styles */
 :root {
-    --primary: #00ffff;
+    --primary: red;
     --dark: #161515;
     --dark-gray: #2d2c2c;
     --light-gray: #3a3a3a;
@@ -45,8 +45,8 @@ section {
 
 .btn {
     display: inline-block;
-    background-color: var(--primary);
-    color: var(--dark);
+    background-color: red;
+    color: var(--light);
     padding: 12px 30px;
     border-radius: 5px;
     font-weight: 600;
@@ -57,20 +57,20 @@ section {
 }
 
 .btn:hover {
-    background-color: #00c8c8;
+    background-color: rgba(169, 5, 5, 0.868);
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+    box-shadow: 0 5px 15px red;
 }
 
 .btn-secondary {
     background-color: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
+    color: var(--light);
+    border: 1px solid red;
     margin-left: 15px;
 }
 
 .btn-secondary:hover {
-    background-color: rgba(0, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.335);
 }
 
 /* Header Styles */
