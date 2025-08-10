@@ -622,7 +622,9 @@ footer {
     .btn {
         padding: 10px 25px;
     }
-    
+    .project-card .btn {
+         padding: 10px 25px;
+    }
     .about-info {
         grid-template-columns: 1fr;
     }
