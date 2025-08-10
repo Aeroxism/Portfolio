@@ -5,7 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyPortfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-      <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="home.css">
+    <style>
+       
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 5px;
+        }
+        .project-card {
+    text-align: left; 
+}
+
+.project-card .btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   width: 170px;
+    font-weight: 600;
+      padding: 12px 30px;
+}
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -27,26 +59,24 @@
     </header>
 
     <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="container hero-wrapper">
-        <div class="hero-content">
-            <h1>Hello, I'm <span>Ordejon, Clarence P.</span></h1>
-            <h2 style="color: white;">Web Developer</h2>
-           
-            <div class="hero-buttons">
-                <a href="#contact" class="btn">Hire Me</a>
-                <button id="viewResumeBtn" class="btn btn-secondary">View Resume</button>
+    <section class="hero" id="home">
+        <div class="container hero-wrapper">
+            <div class="hero-content">
+                <h1>Hello, I'm <span>Ordejon, Clarence P.</span></h1>
+                <h2 style="color: white;">Web Developer</h2>
+               
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn">Hire Me</a>
+                    <button id="viewResumeBtn" class="btn btn-secondary">View Resume</button>
+                </div>
+            </div>
+
+            <!-- Image on the right -->
+            <div class="hero-image">
+                <img src="../picture/profile.jpg" alt="Clarence Ordejon" class="profile-image">
             </div>
         </div>
-
-        <!-- Image on the right -->
-        <div class="hero-image">
-            <img src="../picture/profile.jpg" alt="Clarence Ordejon" class="profile-image">
-        </div>
-    </div>
-</section>
-
-
+    </section>
 
     <!-- About Section -->
     <section class="about" id="about">
@@ -188,23 +218,23 @@
         <div class="container">
             <h2 class="section-title">My <span>Projects</span></h2>
             <div class="projects-container">
-                <div class="project-card">
-                    <img src="../picture/estatee.png" alt="Project 1">
-                    <h3>RealEstate</h3>
-                    <p>Property Value Prediction and Market Analysis Platform using Linear Regression Algorithm.</p>
-                    <a href="#" class="btn">View Project</a>
-                </div>
+               <div class="project-card">
+    <img src="../picture/estatee.png" alt="Project 1">
+    <h3>RealEstate</h3>
+    <p>Property Value Prediction and Market Analysis Platform using Linear Regression Algorithm.</p>
+    <button class="btn view-project" data-video="../picture/RealEstate.mp4">View Project</button>
+</div>
                 <div class="project-card">
                     <img src="../picture/ecommerceas.png" alt="Project 2">
                     <h3>E-commerce</h3>
                     <p> Responsive e-commerce site with secure checkout and inventory management system.</p>
-                    <a href="#" class="btn">View Project</a>
+                    <button class="btn view-project" data-video="https://www.youtube.com/embed/your-video-id-2">View Project</button>
                 </div>
                 <div class="project-card">
                     <img src="../picture/good.png" alt="Project 3">
                     <h3>Ordering Management</h3>
                     <p>Efficient management system for coffee shop orders, inventory, and sales.</p>
-                    <a href="#" class="btn">View Project</a>
+                    <button class="btn view-project" data-video="https://www.youtube.com/embed/your-video-id-3">View Project</button>
                 </div>
             </div>
         </div>
@@ -259,7 +289,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2023 My Portfolio. All Rights Reserved.</p>
+            <p>&copy; 2025 My Portfolio. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -306,95 +336,97 @@
 
     <script src="home.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
-    document.getElementById('resumeModal').addEventListener('shown', function() {
-        var loadingTask = pdfjsLib.getDocument('../picture/resume.pdf');
-        loadingTask.promise.then(function(pdf) {
-            return pdf.getPage(1);
-        }).then(function(page) {
-            var scale = 1.5;
-            var viewport = page.getViewport({scale: scale});
-            var canvas = document.createElement('canvas');
-            var context = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-            var renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
-            var renderTask = page.render(renderContext);
-            
-            document.getElementById('pdf-container').appendChild(canvas);
-        });
-    });
-
-
-
-
-
-
-
-
-
-
-
-
+        // Initialize EmailJS
         emailjs.init('KsVnmEbyLm6AZX8Ps'); // Replace with your actual public key
 
         // Project Video Modal Functionality
-const projectModal = document.getElementById('projectModal');
-const closeProjectModal = document.querySelector('#projectModal .close-btn');
-const projectButtons = document.querySelectorAll('.view-project');
+        const projectModal = document.getElementById('projectModal');
+        const closeProjectModal = document.querySelector('#projectModal .close-btn');
+        const projectButtons = document.querySelectorAll('.view-project');
 
-projectButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const videoUrl = button.getAttribute('data-video');
-        const projectTitle = button.closest('.project-card').querySelector('h3').textContent;
-        
-        document.getElementById('projectVideo').src = videoUrl;
-        document.getElementById('projectTitle').textContent = projectTitle;
-        
-        projectModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    });
-});
+        projectButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const videoUrl = button.getAttribute('data-video');
+                const projectTitle = button.closest('.project-card').querySelector('h3').textContent;
+                
+                document.getElementById('projectVideo').src = videoUrl;
+                document.getElementById('projectTitle').textContent = projectTitle;
+                
+                projectModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
 
-closeProjectModal.addEventListener('click', () => {
-    document.getElementById('projectVideo').src = '';
-    projectModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-});
+        closeProjectModal.addEventListener('click', () => {
+            document.getElementById('projectVideo').src = '';
+            projectModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
 
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target === projectModal) {
+                document.getElementById('projectVideo').src = '';
+                projectModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
 
+        // PDF.js for Resume Modal
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
+        document.getElementById('resumeModal').addEventListener('shown', function() {
+            var loadingTask = pdfjsLib.getDocument('../picture/resume.pdf');
+            loadingTask.promise.then(function(pdf) {
+                return pdf.getPage(1);
+            }).then(function(page) {
+                var scale = 1.5;
+                var viewport = page.getViewport({scale: scale});
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                var renderTask = page.render(renderContext);
+                
+                document.getElementById('pdf-container').appendChild(canvas);
+            });
+        });
 
-// EmailJS Contact Form
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const submitBtn = this.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-    
-    emailjs.sendForm(
-        'service_qqqjdaf',     // Your Service ID
-        'template_cnktvpr',    // Your Template ID
-        this
-    )
-    .then(() => {
-        alert('Message sent successfully!');
-        this.reset();
-        submitBtn.textContent = 'Send Message';
-        submitBtn.disabled = false;
-    }, (error) => {
-        alert('Failed to send message. Please try again later.');
-        console.error('EmailJS Error:', error);
-        submitBtn.textContent = 'Send Message';
-        submitBtn.disabled = false;
-    });
-});
+        // EmailJS Contact Form
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            emailjs.sendForm(
+                'service_qqqjdaf',     // Your Service ID
+                'template_cnktvpr',    // Your Template ID
+                this
+            )
+            .then(() => {
+                alert('Message sent successfully!');
+                this.reset();
+                submitBtn.textContent = 'Send Message';
+                submitBtn.disabled = false;
+            }, (error) => {
+                alert('Failed to send message. Please try again later.');
+                console.error('EmailJS Error:', error);
+                submitBtn.textContent = 'Send Message';
+                submitBtn.disabled = false;
+            });
+        });
+
+        // Nav Toggle
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
     </script>
 </body>
 </html>
