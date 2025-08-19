@@ -88,7 +88,7 @@
                 </div>
                 <div class="about-text">
                     <h3>Who am I?</h3>
-                    <p>I am a passionate web developer with expertise in creating responsive and user-friendly websites. I specialize in front-end development and enjoy turning ideas into reality through clean and efficient code. I also have strong back-end development experience using PHP, Python, and Node.js.</p>
+                    <p>I am a passionate developer with experience in building responsive and user-friendly websites. While I enjoy front-end development, I also work with back-end technologies like PHP, Python, and Node.js. My interests extend beyond web development, and I’m always eager to learn new tools and frameworks to solve diverse problems</p>
                     <div class="about-info">
                         <div class="info-item">
                             <span>Name:</span>
@@ -377,7 +377,7 @@
         // PDF.js for Resume Modal
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
         document.getElementById('resumeModal').addEventListener('shown', function() {
-            var loadingTask = pdfjsLib.getDocument('../picture/resume.pdf');
+            var loadingTask = pdfjsLib.getDocument('../picture/Cv-applying.pdf');
             loadingTask.promise.then(function(pdf) {
                 return pdf.getPage(1);
             }).then(function(page) {
