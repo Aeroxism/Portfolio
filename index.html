@@ -304,7 +304,7 @@
             </div>
             
            <div class="resume-actions" style="text-align: center; margin: 15px 0 5px 0; flex-shrink: 0;">
-    <a href="../picture/resume.pdf" class="btn" download 
+    <a href="../picture/Cvapplying.pdf" class="btn" download 
        style="display: inline-block; 
               padding: 12px 35px; 
               background-color: red; 
@@ -377,7 +377,7 @@
         // PDF.js for Resume Modal
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
         document.getElementById('resumeModal').addEventListener('shown', function() {
-            var loadingTask = pdfjsLib.getDocument('../picture/Cv-applying.pdf');
+            var loadingTask = pdfjsLib.getDocument('../picture/Cvapplying.pdf');
             loadingTask.promise.then(function(pdf) {
                 return pdf.getPage(1);
             }).then(function(page) {
