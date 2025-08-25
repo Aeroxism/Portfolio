@@ -63,14 +63,14 @@ section {
 }
 
 .btn-secondary {
-    background-color: transparent;
+    background-color: red;
     color: var(--light);
     border: 1px solid red;
     margin-left: 15px;
 }
 
 .btn-secondary:hover {
-    background-color: rgba(0, 0, 0, 0.335);
+    background-color: rgb(193, 10, 10);
 }
 
 /* Header Styles */
