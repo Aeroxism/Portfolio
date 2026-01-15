@@ -1,12 +1,18 @@
 /* Base Styles */
 :root {
-    --primary: red;
-    --dark: #161515;
-    --dark-gray: #2d2c2c;
-    --light-gray: #3a3a3a;
-    --text: #ffffff;
-    --text-secondary: #cccccc;
-}
+    --bg: #0b0e12;
+    --panel: #12161c;
+    --muted: #9aa7b2;
+    --text: #eaf0f6;
+    --primary: #16a34a;
+    --primary-700: #0f7a38;
+    --accent: #22d3ee;
+    --border: #1f2732;
+    --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    --radius: 14px;
+    --radius-sm: 10px;
+    --maxw: 1100px;
+} 
 
 * {
     margin: 0;
@@ -45,32 +51,35 @@ section {
 
 .btn {
     display: inline-block;
-    background-color: red;
-    color: var(--light);
+    background-color: var(--primary);
+    color: #ffffff;
     padding: 12px 30px;
-    border-radius: 5px;
+    border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     border: none;
     cursor: pointer;
-}
+    box-shadow: 0 6px 16px rgba(15,23,20,0.06);
+} 
 
 .btn:hover {
-    background-color: rgba(169, 5, 5, 0.868);
+    background-color: #238f7a;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px red;
-}
+    box-shadow: 0 8px 20px rgba(15,23,20,0.08);
+} 
 
 .btn-secondary {
-    background-color: red;
-    color: var(--light);
-    border: 1px solid red;
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
     margin-left: 15px;
+    border-radius: 8px;
+    padding: 10px 26px;
 }
 
 .btn-secondary:hover {
-    background-color: rgb(193, 10, 10);
+    background-color: rgba(11,46,38,0.04);
 }
 
 /* Header Styles */
