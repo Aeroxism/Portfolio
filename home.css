@@ -119,8 +119,9 @@ header {
 
 
 
+/* Mobile-first nav: show hamburger (toggle) by default, show overlay menu when active */
 .nav-toggle {
-    display: none;
+    display: block;
     background: none;
     border: none;
     color: var(--text);
@@ -130,12 +131,27 @@ header {
 }
 
 .nav-menu {
-    display: flex;
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-color: var(--dark-gray);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    display: none; /* will be set to flex when active */
     list-style: none;
 }
 
+.nav-menu.active {
+    left: 0;
+    display: flex;
+}
+
 .nav-menu li {
-    margin-left: 30px;
+    margin: 15px 0;
 }
 
 .nav-menu a {
@@ -566,165 +582,146 @@ footer {
     margin-top: 20px;
 }
 
-/* Mobile Responsive Styles */
-/* Tablet breakpoint to better support iPads and larger tablets */
-@media (max-width: 1024px) {
-    .nav-toggle {
-        display: block;
-    }
-n    .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background-color: var(--dark-gray);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: 0.5s;
-    }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-
-    .nav-menu li {
-        margin: 15px 0;
-    }
-
-    .hero {
-        text-align: center;
-        padding: 120px 0 60px;
-    }
-
-    .hero h1 {
-        font-size: clamp(1.8rem, 3.5vw, 2.2rem);
-    }
-
-    .hero h2 {
-        font-size: clamp(1.2rem, 2.2vw, 1.4rem);
-    }
-
-    .hero-buttons {
-        justify-content: center;
-    }
-
-    .about-content {
-        flex-direction: column;
-    }
-
-    .contact-container {
-        flex-direction: column;
-    }
-
-    .section-title {
-        font-size: 2rem;
-    }
-
-    .modal-content {
-        width: 95%;
-        margin: 6% auto;
-        padding: 20px;
-    }
+/* Mobile-first responsive styles (base = mobile/small phones) */
+/* Base mobile defaults */
+.section-title {
+    font-size: 1.6rem;
+}
+.hero {
+    text-align: center;
+    padding: 100px 0 60px;
+}
+.hero h1 {
+    font-size: 1.8rem;
+}
+.hero h2 {
+    font-size: 1.3rem;
+    color: var(--primary);
+}
+.hero p {
+    font-size: 1rem;
+}
+.hero-buttons {
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.btn {
+    padding: 10px 25px;
+}
+.project-card .btn {
+    padding: 10px 25px;
+}
+.about-content {
+    flex-direction: column;
+}
+.contact-container {
+    flex-direction: column;
+}
+.about-info {
+    grid-template-columns: 1fr;
+}
+.modal-content {
+    width: 95%;
+    margin: 6% auto;
+    padding: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
-@media (max-width: 768px) {
-    .nav-toggle {
-        display: block;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background-color: var(--dark-gray);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: 0.5s;
-    }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-    
-    .nav-menu li {
-        margin: 15px 0;
-    }
-    
-    .hero {
-        text-align: center;
-        padding: 120px 0 60px;
-    }
-    
-    .hero h1 {
-        font-size: 2rem;
-    }
-    
-    .hero h2 {
-        font-size: 1.5rem;
-    }
-    
-    .hero-buttons {
-        justify-content: center;
-    }
-    
-    .about-content {
-        flex-direction: column;
-    }
-    
-    .contact-container {
-        flex-direction: column;
-    }
-    
+/* Larger phones / small tablets */
+@media (min-width: 480px) {
     .section-title {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
-    
-    .modal-content {
-        width: 90%;
-        margin: 10% auto;
-        padding: 20px;
-    }
-}
-
-@media (max-width: 480px) {
     .hero h1 {
-        font-size: 1.8rem;
+        font-size: clamp(1.9rem, 3.2vw, 2.2rem);
     }
-    
     .hero h2 {
-        font-size: 1.3rem;
+        font-size: clamp(1.3rem, 2vw, 1.5rem);
     }
-    
-    .hero p {
-        font-size: 1rem;
-    }
-    
     .btn {
-        padding: 10px 25px;
+        padding: 12px 28px;
     }
     .project-card .btn {
-         padding: 10px 25px;
+        padding: 12px 28px;
     }
     .about-info {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
     .hero-buttons {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row;
+        gap: 15px;
     }
-    
     .btn-secondary {
-        margin-left: 0;
+        margin-left: 15px;
+    }
+}
+
+/* Tablets (portrait and small landscape) */
+@media (min-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    .hero h1 {
+        font-size: clamp(2.2rem, 3.5vw, 2.6rem);
+        text-align: left;
+    }
+    .hero h2 {
+        font-size: clamp(1.5rem, 2.2vw, 1.8rem);
+    }
+    .about-content {
+        flex-direction: row;
+        gap: 50px;
+    }
+    .contact-container {
+        flex-direction: row;
+    }
+    .modal-content {
+        width: 85%;
+        margin: 3% auto;
+        padding: 25px;
+    }
+}
+
+/* Desktop and large tablets */
+@media (min-width: 1024px) {
+    /* Show full nav on larger screens */
+    .nav-toggle {
+        display: none;
+    }
+    .nav-menu {
+        position: static;
+        left: auto;
+        top: auto;
+        width: auto;
+        height: auto;
+        background: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .nav-menu li {
+        margin-left: 30px;
+    }
+    .hero {
+        text-align: left;
+        padding: 100px 0 60px;
+    }
+    .hero-wrapper {
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+    }
+    .profile-image {
+        max-width: 400px;
+        margin: 0;
+    }
+    .modal-content {
+        width: 80%;
+        max-width: 900px;
+        margin: 2% auto;
     }
 }
 
