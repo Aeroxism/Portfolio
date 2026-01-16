@@ -20,6 +20,13 @@
     box-sizing: border-box;
 }
 
+/* Make images and media fluid by default */
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--dark);
@@ -157,7 +164,8 @@ header {
 }
 
 .hero h1 {
-    font-size: 2.5rem;
+    /* Fluid font sizing for better responsiveness */
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin-bottom: 20px;
     line-height: 1.2;
 }
@@ -167,7 +175,7 @@ header {
 }
 
 .hero h2 {
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
     color: var(--primary);
     margin-bottom: 15px;
 }
@@ -197,11 +205,14 @@ header {
 }
 
 .profile-image {
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #ccc; 
+    border: 3px solid #ccc;
+    display: block;
+    margin: 0 auto;
 }
 
 .about {
@@ -504,6 +515,9 @@ footer {
     max-width: 900px;
     position: relative;
     animation: modalopen 0.5s;
+    /* Prevent overflowing the viewport on small devices */
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 @keyframes modalopen {
@@ -553,6 +567,68 @@ footer {
 }
 
 /* Mobile Responsive Styles */
+/* Tablet breakpoint to better support iPads and larger tablets */
+@media (max-width: 1024px) {
+    .nav-toggle {
+        display: block;
+    }
+n    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: var(--dark-gray);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: 0.5s;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu li {
+        margin: 15px 0;
+    }
+
+    .hero {
+        text-align: center;
+        padding: 120px 0 60px;
+    }
+
+    .hero h1 {
+        font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+    }
+
+    .hero h2 {
+        font-size: clamp(1.2rem, 2.2vw, 1.4rem);
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .about-content {
+        flex-direction: column;
+    }
+
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 6% auto;
+        padding: 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .nav-toggle {
         display: block;
