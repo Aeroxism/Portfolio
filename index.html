@@ -1478,6 +1478,14 @@
                 }
             });
         });
+
+        // Suppress noise from browser extension `webpage_content_reporter.js` if it remains active.
+        window.addEventListener('error', (e) => {
+            if (e.filename && e.filename.includes('webpage_content_reporter.js')) {
+                e.preventDefault();
+                console.log('[ignored extension error] webpage_content_reporter.js');
+            }
+        });
     </script>
 </body>
 </html>
