@@ -84,10 +84,28 @@ const projectButtons = document.querySelectorAll('.view-project');
 
 projectButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const videoUrl = button.getAttribute('data-video');
+        const videoUrl = (button.getAttribute('data-video') || '').trim();
         const projectTitle = button.closest('.project-card').querySelector('h3').textContent;
         
-        document.getElementById('projectVideo').src = videoUrl;
+        const videoEl = document.getElementById('projectVideo');
+        if (videoEl) {
+            // Support either <video id="projectVideo"> or <source id="projectVideo">
+            if (videoEl.tagName && videoEl.tagName.toLowerCase() === 'source') {
+                videoEl.src = videoUrl;
+                const parentVideo = videoEl.closest('video');
+                if (parentVideo) {
+                    try { parentVideo.load(); } catch (_) {}
+                    const p = parentVideo.play();
+                    if (p && typeof p.catch === 'function') p.catch(() => {});
+                }
+            } else {
+                // If absolute path is used, keep it; otherwise normalize to relative for portability.
+                videoEl.src = videoUrl;
+                try { videoEl.load(); } catch (_) {}
+                const p = videoEl.play();
+                if (p && typeof p.catch === 'function') p.catch(() => {});
+            }
+        }
         document.getElementById('projectTitle').textContent = projectTitle;
         
         projectModal.style.display = 'block';

@@ -1081,7 +1081,7 @@
                         <h3>RealEstate — Web App</h3>
                         <p>Property Value Prediction and Market Analysis Platform using Linear Regression Algorithm.</p>
                         <div class="project-buttons">
-                            <button class="btn btn-primary view-project" data-type="video" data-video="/picture/RealEstate.mp4">
+                            <button class="btn btn-primary view-project" data-type="video" data-video="picture/RealEstate.mp4">
                                 <i class="fas fa-play"></i> View Demo
                             </button>
                             <button class="btn btn-secondary interested-btn" data-project="RealEstate">
@@ -1126,7 +1126,7 @@
                         <h3>Health Link — Web App</h3>
                         <p>Patient Information Coordination and Medical Staff Workflow Management System using AI Recommendation Module.</p>
                         <div class="project-buttons">
-                            <button class="btn btn-primary view-project" data-type="video" data-video="/picture/System.mp4">
+                            <button class="btn btn-primary view-project" data-type="video" data-video="picture/System.mp4">
                                 <i class="fas fa-play"></i> View Demo
                             </button>
                             <button class="btn btn-secondary interested-btn" data-project="Health Link">
@@ -1376,10 +1376,10 @@
                 const title = card ? card.querySelector('h3').textContent : '';
 
                 if (type === 'video' && videoModal && videoModalBody) {
-                    const videoUrl = button.getAttribute('data-video');
+                    const videoUrl = (button.getAttribute('data-video') || '').trim();
                     videoModalBody.innerHTML = `
                         <h3 style="margin-bottom: 16px;">${title}</h3>
-                        <video id="modalVideo" controls style="width: 100%; max-height: 70vh;" preload="metadata">
+                        <video id="modalVideo" controls playsinline style="width: 100%; max-height: 70vh;" preload="metadata">
                             <source src="${videoUrl}" type="video/mp4">
                             Sorry, your browser does not support HTML video.
                         </video>
@@ -1390,11 +1390,26 @@
                     const videoErrorMessage = videoModalBody.querySelector('#videoErrorMessage');
 
                     if (modalVideo) {
+                        // Ensure the browser re-evaluates the inserted <source> element
+                        try {
+                            modalVideo.load();
+                        } catch (_) {
+                            // ignore
+                        }
+
                         modalVideo.addEventListener('error', () => {
                             if (videoErrorMessage) {
                                 videoErrorMessage.style.display = 'block';
                             }
                         });
+
+                        // Best-effort auto-play (will be blocked by some browsers unless muted)
+                        const playPromise = modalVideo.play();
+                        if (playPromise && typeof playPromise.catch === 'function') {
+                            playPromise.catch(() => {
+                                // User can press play manually.
+                            });
+                        }
                     }
 
                     openModal(videoModal);
